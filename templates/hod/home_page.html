@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!-- A propos de l'ecole -->
+<div class="container-fluid">
+    <div class="row p-5" style="background-color: aqua;">
+        <div class="col-7">
+            <img src="{% static 'image/TechnoSup.jfif' %}" alt="Image de TechnoSup"
+                style="width: 600px; height: 400px;">
+        </div>
+        <div class="col-5">
+            <h3> <span class="display-1">TechnoSup</span> est une ecole de Lorem ipsum dolor sit amet consectetur,
+                adipisicing elit.
+                Tempore aperiam, deserunt odit voluptates explicabo, cum distinctio voluptatum aliquam
+                vero nobis mollitia tempora harum necessitatibus voluptatem accusantium deleniti ipsa
+                libero dolorum.
+            </h3>
+            <a href="#" class="btn btn-primary">Plus d'info</a>
+        </div>
+    </div>
+</div>
+
+<!-- Nos filieres -->
+<div class="container-fluid" style="background-color: rgb(66, 11, 128);">
+    <h1 class="text-center text-white pt-3"><u>Nos Filiers</u></h1>
+    <div class="row row-cols-1 row-cols-md-3 p-4 g-4">
+        <div class="col">
+            <div class="card h-100">
+                <img src="{% static 'image/fcb.jfif' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title text-warning">FCB - Finance Commerce Banque</h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
+                        additional content. This content is a little bit longer.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="{% static 'image/ge.jfif' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title text-warning">GE - Gestion d'Entreprise</h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
+                        additional content. This content is a little bit longer.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="{% static 'image/glt.jfif' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title text-warning">GLT - Gestion Logistique Transport</h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
+                        additional content.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="{% static 'image/grh.jfif' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title text-warning">GRH - Gestion de Resource Humaine</h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
+                        additional content. This content is a little bit longer.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="{% static 'image/mc.jfif' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title text-warning">MC - Management Comptable</h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
+                        additional content.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="{% static 'image/miage.jfif' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title text-warning">
+                        MIAGE - Management Informatique Applique a la Gestion d'Entreprise
+                    </h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
+                        additional content. This content is a little bit longer.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Que disent nos eleves -->
+<div class="testimonial-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="section-header text-center">
+                    <h2>Que disent nos etudiants</h2>
+                    <p>Nous avons beacoup d'eleves qui viennet de different domain. Des nouveau bacheliers et
+                        des proffesionels
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div id="carouselExampleIndicators" class="carousel slide">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                            class="active" aria-current="true" aria-label="Slide 1">
+                        </button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                            aria-label="Slide 2">
+                        </button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                            aria-label="Slide 3">
+                        </button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="icon-area">
+                                <i class="fa fa-comments"></i>
+                            </div>
+                            <div class="content text-center">
+                                <p>Je m'etais inscrit etant nouveau bachelier. Maintenant que je travaille,
+                                    j'arrive a jongler entre mon job et mes etudes a TechnoSup.
+                                </p>
+                                <div class="person">
+                                    <img src="{% static 'image/fcb.jfif' %}" alt="">
+                                </div>
+                                <h5>Diaby Fadimata</h5>
+                                <h6>LicenceIII FCB</h6>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="icon-area">
+                                <i class="fa fa-comments"></i>
+                            </div>
+                            <div class="content text-center">
+                                <p>Je voulais depuis longtemps etudier filiere informatique sans aussi laisser
+                                    mon travail, et voila TechnoSup a mon secours.
+                                </p>
+                                <div class="person">
+                                    <img src="{% static 'image/ge.jfif' %}" alt="">
+                                </div>
+                                <h5>Abdoulaye Haidara</h5>
+                                <h6>LicenceIII - MIAGE</h6>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="icon-area">
+                                <i class="fa fa-comments"></i>
+                            </div>
+                            <div class="content text-center">
+                                <p>Le reve de tous les nouveau bacheliers a Gao et d'aller a TechnoSup.
+                                    Depuis que je suis la, je comprends pourquoi tous le monde voulait etre la.
+                                </p>
+                                <div class="person">
+                                    <img src="{% static 'image/glt.jfif' %}" alt="">
+                                </div>
+                                <h5>Hadizatou Maiga</h5>
+                                <h6>LicenceI - GLT</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

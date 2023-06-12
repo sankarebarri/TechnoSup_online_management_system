@@ -1,0 +1,87 @@
+.a-hover {
+    font-weight: bolder;
+}
+
+.a-hover:hover {
+    background-color: azure;
+}
+
+.navbar-brand:hover, .nav-right:hover {
+    color: azure;
+}
+
+.nav-right {
+    font-size: 20px;
+}
+
+.card img {
+    height: 250px;
+}
+
+
+/* Carousel */
+.testimonial-area {
+    padding: 80px 0;
+    background-color: #e9dbeb;
+}
+
+.section-header h2 {
+    color: #f75023;
+    font-weight: 600;
+}
+
+.section-header {
+    padding-bottom: 15px;
+}
+
+.section-header p {
+    color: #3f3b80;
+    width: 40%;
+    margin: auto;
+}
+
+.icon-area {
+    text-align: center;
+}
+
+.icon-area i {
+    color: #f75023;
+    font-size: 80px;
+    margin-bottom: 20px;
+}
+
+.content p {
+    color: #6f6b80;
+    width: 60%;
+    margin: auto;
+}
+
+.person {
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: auto;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #f75023;
+    margin-top: 50px;
+}
+
+.person img {
+    width: 100%;
+}
+
+.content h5 {
+    font-weight: 900;
+    margin-top: 15px;
+}
+
+.carousel-indicators {
+    bottom: -80px;
+}
+
+.carousel-indicators [data-bs-target] {
+    width: 60px;
+    height: 10px;
+    background-color: #f75023;
+}

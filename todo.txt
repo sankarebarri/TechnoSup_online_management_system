@@ -1,0 +1,25 @@
+-- Redesign module and filiere models
+
+
+-- Add course #48
+-- View course
+-- Edit course
+-- Delete course
+
+-- Edit staff
+-- Delete staff
+
+-- Edit Module
+-- Delete Module
+
+-- Edit Session
+-- Delete Session
+-- View Session
+
+-- Edit Matiere
+-- Delete Matiere
+-- Add search to every view page
+-- Add restrictions to some pages
+
+
+-- Staff views should include teachers activities, attendaces, subject being thought, finished subjects, statistics of success and fail

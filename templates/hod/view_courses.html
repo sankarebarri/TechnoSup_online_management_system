@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="">
+    <div class="row">
+        <div class="col-2">
+            {% include "includes/sidebar.html" %}
+        </div>
+        <div class="col-10">
+            <div class="table-responsive text-nowrap">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Module</th>
+                            <th scope="col">Proffeseur</th>
+                            <th scope="col">Date Ajoutee</th>
+                            <th scope="col">Date modifiee</th>
+                            <th scope="col">Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for course in courses %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ course.name }}</td>
+                            <td>Abd.Rahman</td>
+                            <td>{{ course.created_at }}</td>
+                            <td>{{ course.updated_at }}</td>
+                            <td>
+                                En cours
+                                <a href="">Modifiez</a>
+                                <a href="">Supprimer</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

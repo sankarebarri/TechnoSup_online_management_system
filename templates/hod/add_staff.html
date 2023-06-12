@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-2 py-2">
+        {% include "includes/sidebar.html" %}
+    </div>
+    <div class="col-10">
+        <section style="background-color: #eee;">
+            <div class="container py-2">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card mb-4">
+                            <form action="" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="col-12">
+                                    <h4 class="text-center">Ajouter un Staff</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Profile Pic</p>
+                                        </div>
+                                        <div class="form-group col-sm-9">
+                                            <input type="file" class="form-control" name="profile_pic">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Username</p>
+                                        </div>
+                                        <div class="form-group col-sm-9">
+                                            <input type="text" class="form-control" name="username">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Nom</p>
+                                        </div>
+                                        <div class=" form-group col-sm-9">
+                                            <input type="text" class="form-control" name="nom">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Prenom</p>
+                                        </div>
+                                        <div class=" form-group col-sm-9">
+                                            <input type="text" class="form-control" name="prenom">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Email</p>
+                                        </div>
+                                        <div class=" form-group col-sm-9">
+                                            <input type="email" class="form-control" name="email">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Mot de passe</p>
+                                        </div>
+                                        <div class="form-group col-sm-9">
+                                            <input type="password" class="form-control" name="password">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Sexe</p>
+                                        </div>
+                                        <div class="form-group col-sm-9">
+                                            <select name="sexe" id="" class="form-group col-12"
+                                                style="height: 40px; border-radius: 5px;">
+                                                <option>Choisir le sexe</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Femelle">Femelle</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Telephone</p>
+                                        </div>
+                                        <div class=" form-group col-sm-9">
+                                            <input type="tel" class="form-control" name="telephone">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Adresse</p>
+                                        </div>
+                                        <div class=" form-group col-sm-9">
+                                            <input type="text" class="form-control" name="adresse">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <input class="btn btn-primary btn-lg my-2" type="submit" value="Ajouter">
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock content %}
