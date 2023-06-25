@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect, HttpResponse
 from app.EmailBackEnd import EmailBackEnd
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from app.models import CustomUser
+from app.models import CustomUser, StudentRecord
+from django.contrib import messages
 
 
 # general home page
@@ -27,18 +28,18 @@ def do_login(request):
         if user != None:
             login(request, user)
             user_type = user.user_type
-            if user_type == '1':                
+            if user_type == 'ADMIN':                
                 return redirect('hod_home')
-            elif user_type == '2':    
+            elif user_type == 'STAFF':    
                 return redirect('staff_home')            
                 # return HttpResponse('This Staff page')
-            elif user_type == '3':                
-                return HttpResponse('This Student page')
+            elif user_type == 'STUDENT':                
+                return redirect('profile')
             else:
-                # Message
+                messages.warning(request, 'Assurez vous que vous faites rentrer bon email et mot de passe')
                 return redirect('login')
         else:
-            # Message
+            messages.warning(request, 'Assurez vous que vous faites rentrer de bon email et mot de passe')
             return redirect('login')
     return None
 
@@ -78,3 +79,15 @@ def profile_update(request):
             # messages.error(request, 'Echec! Votre profilen'a pas ete modifie)
             pass
     return render(request, 'users/profile_update.html')
+
+
+
+def subjects(request):
+    signed_in_user = request.user.username
+    records = StudentRecord.objects.filter(student__user__username=signed_in_user)
+    
+    context = {
+        'records': records,
+    }
+
+    return render(request, 'users/subjects.html', context)

@@ -1,13 +1,18 @@
 from django.contrib import admin
-from .models import CustomUser, Course, SessionYear, Student, Staff, StaffNotification
-from django.contrib.auth.admin import UserAdmin
 
-class UserModel(UserAdmin):
-    list_display = ['username', 'user_type']
+from .models import (CustomUser, Student,
+                    Filiere, Promotion,
+                    Profile, Module,
+                    StudentRecord, Staff
+)
 
-admin.site.register(CustomUser, UserModel)
-admin.site.register(Course)
-admin.site.register(SessionYear)
+
+admin.site.register(CustomUser)
 admin.site.register(Student)
+admin.site.register(Profile)
+admin.site.register(Module)
+admin.site.register(StudentRecord)
 admin.site.register(Staff)
-admin.site.register(StaffNotification)
+admin.site.register(Filiere)
+admin.site.register(Promotion)
+

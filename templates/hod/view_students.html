@@ -16,7 +16,7 @@
                             <th scope="col">Immatriculation</th>
                             <th scope="col">Nom</th>
                             <th scope="col">Prenom</th>
-                            <th scope="col">Class</th>
+                            <th scope="col">Classe</th>
                             <th scope="col">Filiere</th>
                             <th scope="col">No. Tel</th>
                         </tr>
@@ -26,18 +26,16 @@
                         <tr>
                             <th scope="row">{{ forloop.counter }}</th>
                             <td>
-                                <img src="{{ student.admin.profile_pic.url }}" alt="" class="rounded-circle"
-                                    style="height: 25px">
+                                <img src="{{ student.image.url }}" alt="" class="rounded-circle" style="height: 25px">
                             </td>
-                            <td>LT2021X0416</td>
-                            <td>{{ student.admin.first_name}}</td>
-                            <td>{{ student.admin.last_name}}</td>
-                            <td>{{ student.course_id }}</td>
-                            <td>MIAGE</td>
+                            <td>{{ student.immatriculation }}</td>
+                            <td>{{ student.user.first_name }}</td>
+                            <td>{{ student.user.last_name }}</td>
+                            <td>{{ student.classe }}</td>
+                            <td>{{ student.filiere.nom }}</td>
                             <td>
-                                {{ student.telephone }}
+                                {{ student.telephone_etudiant }}
                                 <a href="{% url 'edit-student' student.id %}">Modifiez</a>
-                                <a href="{% url 'delete-student' student.id %}">Supprimer</a>
                             </td>
                         </tr>
                         {% endfor %}

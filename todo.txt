@@ -23,3 +23,8 @@
 
 
 -- Staff views should include teachers activities, attendaces, subject being thought, finished subjects, statistics of success and fail
+
+
+CHECK LISTS
+-- Is everything in french?
+-- Grammatical and orthographe correction

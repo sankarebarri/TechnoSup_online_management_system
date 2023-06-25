@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Matiere</th>
+                <th scope="col">Proffesseur</th>
+                <th scope="col">Statut</th>
+                <th scope="col">Note</th>
+                <th scope="col">Valide</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ record.modules.nom }}</td>
+                <td>{{ record.modules.professeur }}</td>
+                <td>{{ record.modules.statut }}</td>
+                <td>{{ record.note }}</td>
+                <td>
+                    {% if record.note >= 10 %}
+                    Oui
+                    {% else %}
+                    Non
+                    {% endif %}
+                </td>
+
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}

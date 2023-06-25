@@ -26,9 +26,11 @@
             </ul>
             <ul class="navbar-nav">
                 {% if user.is_authenticated %}
+                {% if user.is_superuser == False %}
                 <li class="nav-item btn btn-secondary a-hover">
                     <a class="nav-link" href="{% url 'profile' %}">Profile</a>
                 </li>
+                {% endif %}
                 <!-- <li class="nav-item btn btn-secondary mx-3 a-hover">
                         <a class="nav-link" href="#">Renseignez-vous</a>
                     </li> -->
@@ -50,7 +52,7 @@
         </div>
     </div>
 </nav>
-<div class="row">
+<div class=" row">
     {% if messages %}
     {% for message in messages %}
     <h3 class="alert alert-{{ message.tags }}" style="text-align:center;">

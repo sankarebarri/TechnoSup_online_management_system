@@ -9,52 +9,40 @@
         <section style="background-color: #eee;">
             <div class="container py-5">
                 <div class="row">
-                    <div class="col">
-                        <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
-                            <ol class="breadcrumb mb-0">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">User</a></li>
-                                <li class="breadcrumb-item" aria-current="page">User Profile Update</li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-
-                <div class="row">
                     <div class="col-lg-12">
                         <div class="card mb-4">
                             <form action="" method="post" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <div class="col-12">
-                                    <h4 class="text-center">Modifiez {{ student.admin.first_name }}
-                                        {{ student.admin.last_name }}(and image)</h4>
+                                    <h2 class="text-center">Modifiez {{ student.user.first_name }}
+                                        {{ student.user.last_name }}(and image)</h2>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <p class="mb-0">Profile Pic</p>
+                                            <p class="mb-0">Photo Profil</p>
                                         </div>
                                         <div class="form-group col-sm-9">
                                             <input type="file" class="form-control" name="profile_pic">
                                         </div>
                                     </div>
-
-                                    <div class="row" hidden>
+                                    <hr>
+                                    <div class="row">
                                         <div class="col-sm-3">
                                             <p class="mb-0">Student Id</p>
                                         </div>
                                         <div class="form-group col-sm-9">
-                                            <input type="text" class="form-control" value="{{ student.admin.id }}"
+                                            <input type="text" class="form-control" value="{{ student.user.id }}"
                                                 name="student_id">
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <p class="mb-0">Username</p>
+                                            <p class="mb-0">Nom d'utilisateur</p>
                                         </div>
                                         <div class="form-group col-sm-9">
-                                            <input type="text" class="form-control" value="{{ student.admin.username }}"
+                                            <input type="text" class="form-control" value="{{ student.user.username }}"
                                                 name="username">
                                         </div>
                                     </div>
@@ -65,7 +53,7 @@
                                         </div>
                                         <div class=" form-group col-sm-9">
                                             <input type="text" class="form-control"
-                                                value="{{ student.admin.first_name }}" name="nom">
+                                                value="{{ student.user.first_name }}" name="nom">
                                         </div>
                                     </div>
                                     <hr>
@@ -74,8 +62,8 @@
                                             <p class="mb-0">Prenom</p>
                                         </div>
                                         <div class=" form-group col-sm-9">
-                                            <input type="text" class="form-control"
-                                                value="{{ student.admin.last_name }}" name="prenom">
+                                            <input type="text" class="form-control" value="{{ student.user.last_name }}"
+                                                name="prenom">
                                         </div>
                                     </div>
                                     <hr>
@@ -84,7 +72,7 @@
                                             <p class="mb-0">Email</p>
                                         </div>
                                         <div class=" form-group col-sm-9">
-                                            <input type="email" class="form-control" value="{{ student.admin.email }}"
+                                            <input type="email" class="form-control" value="{{ student.user.email }}"
                                                 name="email">
                                         </div>
                                     </div>
@@ -98,31 +86,18 @@
                                                 placeholder="ne changez rien ici si vouz n'avez pas l'intention de changez le mot de passe de l'etudiant">
                                         </div>
                                     </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <p class="mb-0">Sexe</p>
-                                        </div>
-                                        <div class="form-group col-sm-9">
-                                            <select name="sexe" id="" class="form-group col-12"
-                                                style="height: 40px; border-radius: 5px;">
-                                                <option>Choisir le sexe</option>
-                                                <option value="Male">Male</option>
-                                                <option value="Femelle">Femelle</option>
-                                            </select>
-                                        </div>
-                                    </div>
+
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
                                             <p class="mb-0">Filiere</p>
                                         </div>
                                         <div class="form-group col-sm-9">
-                                            <select name="course_id" id="" class="form-group col-12"
+                                            <select name="filiere_id" id="" class="form-group col-12"
                                                 style="height: 40px; border-radius: 5px;">
                                                 <option>Choisir la filiere</option>
-                                                {% for course in courses  %}
-                                                <option value="{{ course.id }}">{{ course.name }}</option>
+                                                {% for filiere in filieres  %}
+                                                <option value="{{ filiere.id }}">{{ filiere.nom }}</option>
                                                 {% endfor %}
 
 
@@ -132,27 +107,26 @@
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <p class="mb-0">Session</p>
+                                            <p class="mb-0">Classe</p>
                                         </div>
                                         <div class="form-group col-sm-9">
-                                            <select name="session_year_id" id="" class="form-group col-12"
+                                            <select name="classe" id="" class="form-group col-12"
                                                 style="height: 40px; border-radius: 5px;">
-                                                <option>Choisir la session</option>
-                                                {% for year in session_years  %}
-                                                <option value="{{ year.id }}">{{ year.session_start }} --
-                                                    {{ year.session_end }}</option>
-                                                {% endfor %}
+                                                <option>Choisir la classe</option>
+                                                <option value="Licence I">Licence I</option>
+                                                <option value="Licence II">Licence II</option>
+                                                <option value="Licence III">Licence III</option>
                                             </select>
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <p class="mb-0">Telephone</p>
+                                            <p class="mb-0">Telephone Etudiant</p>
                                         </div>
                                         <div class=" form-group col-sm-9">
-                                            <input type="tel" class="form-control" value="{{ student.telephone }}"
-                                                name="telephone">
+                                            <input type="tel" class="form-control"
+                                                value="{{ student.telephone_etudiant }}" name="telephone_etudiant">
                                         </div>
                                     </div>
                                     <hr>
@@ -161,7 +135,7 @@
                                             <p class="mb-0">Adresse</p>
                                         </div>
                                         <div class=" form-group col-sm-9">
-                                            <input type="text" class="form-control" value="{{ student.address }}"
+                                            <input type="text" class="form-control" value="{{ student.adresse }}"
                                                 name="adresse">
                                         </div>
                                     </div>

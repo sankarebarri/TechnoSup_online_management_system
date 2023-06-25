@@ -1,87 +1,115 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.shortcuts import reverse
 
 class CustomUser(AbstractUser):
-
     USER = (
-        (1, 'HOD'),
-        (2, 'STAFF'),
-        (3, 'STUDENT'),
+        ('ADMIN', 'ADMIN'),
+        ('STAFF', 'STAFF'),
+        ('STUDENT', 'STUDENT'),
     )
+    user_type = models.CharField(choices=USER, max_length=50, default='ADMIN')
 
-    user_type = models.CharField(choices=USER, max_length=50, default=1)
-    profile_pic = models.ImageField(upload_to='profile_pic', default='default.png')
+#Annee scolaire
+class Promotion(models.Model):
+    annee_debut = models.CharField(max_length=100)
+    annee_fin = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return f"{self.annee_debut} - {self.annee_fin}"
+ 
 
-### Filiere
-class Course(models.Model):
-    name = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+# Il devrait avoir une relation manytomany avec le module
+class Filiere(models.Model):
+    nom = models.CharField(max_length=100)
+    nom_abregee = models.CharField(max_length=100)
+    date_cree = models.DateTimeField(auto_now_add=True)
+    modules = models.ManyToManyField('Module', blank=True)
+    date_modifie = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
-
-
-### Filiere
-# class Course(models.Model):
-#     full_name = models.CharField(max_length=100)
-#     short_name = models.CharField(max_length=100)
-#     course_id = models.CharField(max_length=100)
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
-
-#     def __str__(self):
-#         return self.name
-
-
-### Module
-# class Module(models.Model):
-#     name = models.CharField(max_length=100)
-#     proffeseur = models.CharField(max_length=100)
-#     module_id = models.CharField(max_length=100)
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)  
-
-class SessionYear(models.Model):
-    session_start = models.CharField(max_length=100)
-    session_end = models.CharField(max_length=100)
+        return self.nom
     
+class Module(models.Model):
+    nom = models.CharField(max_length=100)
+    professeur = models.CharField(max_length=100)
+    statut = models.CharField(
+        choices=(
+            ('en cours', 'en cours'),
+            ('fini', 'fini'),
+            ('commence', 'commence'),
+            ('en attente', 'en attente'),
+        ),
+        max_length=10
+    )
+    date_debut = models.DateField(auto_now=True, blank=True) # just a datefield
+    date_fini = models.DateField(auto_now=True, blank=True) # blank=True
+
+    date_cree = models.DateTimeField(auto_now_add=True)
+    date_modifie = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.session_start} -- {self.session_end}"
-    
+        return f'{self.nom} -- {self.professeur}'
+
 
 class Student(models.Model):
-    admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    address = models.TextField()
-    gender = models.CharField(max_length=100)
-    course_id = models.ForeignKey(Course, on_delete=models.DO_NOTHING)
-    telephone = models.IntegerField()
-    session_year = models.ForeignKey(SessionYear, on_delete=models.DO_NOTHING)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    sexe = models.CharField(max_length=100)
+    telephone_etudiant = models.IntegerField(null=True, blank=True)
+    telephone_parent = models.IntegerField(null=True, blank=True)
+    adresse = models.TextField(null=True, blank=True)
+    image = models.ImageField(upload_to='student_image', default='student_default_image.png')
+    date_de_naissance = models.CharField(max_length=25, null=True, blank=True) # use charfield
+    immatriculation = models.CharField(max_length=20)    
+    classe = models.CharField(
+        choices = (
+            ('L1', 'Licence I'),
+            ('L2', 'Licence II'),
+            ('L3', 'Licence III'),
+        ),
+        max_length=15
+    )
+    filiere = models.ForeignKey(Filiere, on_delete=models.CASCADE)
+    promotion = models.ForeignKey(Promotion, on_delete=models.CASCADE)
+    modules = models.ManyToManyField(Module, blank=True) 
+    date_inscription = models.DateField(auto_now_add=True)
+    date_dernier_modification = models.DateField(auto_now_add=True) # should appear some where on the admin and profile page
 
     def __str__(self):
-        return f"{self.admin.first_name} {self.admin.last_name}"
-
-
-
-class Staff(models.Model):
-    admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    address = models.TextField()
-    gender = models.CharField(max_length=100)    
-    telephone = models.IntegerField()    
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return f"{self.admin.first_name} {self.admin.last_name}"
+        return f"{self.user.first_name}-{self.user.last_name}-{self.immatriculation}"
     
 
-class StaffNotification(models.Model):
-    staff_id = models.ForeignKey(Staff, on_delete=models.CASCADE)
-    message = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
+class Staff(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='staff_image', default='staff_default_image.png')
+    adresse = models.TextField()
+    sexe = models.CharField(max_length=100)
+    modules = models.ManyToManyField(Module)  
+    telephone = models.IntegerField()
+    date_cree = models.DateTimeField(auto_now_add=True)
+    date_modifie = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.staff_id.admin.first_name
+        return f"{self.user.first_name} {self.user.last_name}"
+    
+
+class Profile(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE) # No need of this
+    surnom = models.CharField(max_length=20, null=True, blank=True) # This should be an optional field
+    background_image = models.ImageField(upload_to='background_image', default='technosup_background_image.png', null=True, blank=True)
+    description_profile = models.TextField(max_length=2000, help_text='Decrivez un peu de vous... votre personnalite, votre ambitions, etc', null=True, blank=True) #This should be an optional field
+
+
+    def __str__(self):
+        return f"{self.user.email}"
+
+
+class StudentRecord(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    modules = models.ForeignKey(Module, on_delete=models.CASCADE)
+    note = models.FloatField(default=0)
+    date_cree = models.DateTimeField(auto_now_add=True)
+    date_modifie = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.student.user.first_name} - {self.note}'

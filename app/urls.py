@@ -23,10 +23,13 @@ urlpatterns = [
     path('hod/course/add_course', hod_views.add_course, name='add-course'),
 
     path('hod/course/view_staffs', hod_views.view_staffs, name='view-staffs'),
-    path('hod/course/add_staff', hod_views.add_staff, name='add-staff'),
+    # path('hod/course/add_staff', hod_views.add_staff, name='add-staff'),
 
     ## Staff ##
     path('staff/home', staff_views.staff_home, name='staff_home'),
+
+    ## Subjects ##
+    path('subjects/', views.subjects, name='subjects'),
 
     ## Student ##
     # path('hod/home', hod_views.HOME, name='hod_home'),
