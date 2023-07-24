@@ -33,4 +33,13 @@ urlpatterns = [
 
     ## Student ##
     # path('hod/home', hod_views.HOME, name='hod_home'),
+
+    ## Messages
+    path('messages/', hod_views.view_messages, name='messages'),
+    path('message/<str:id>/', hod_views.view_message, name='message'),
+    path('send_message/', hod_views.send_message, name='send-message'),
+
+    ## Contact
+    path('contact/', views.contact, name='contact'),
+
 ]

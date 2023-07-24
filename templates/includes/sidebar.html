@@ -8,11 +8,10 @@
     .sidenav {
         height: 100%;
         width: 200px;
-
         z-index: 1;
         top: 0;
         left: 0;
-        background-color: #111;
+        background-color: rgb(11, 33, 39);
         overflow-x: hidden;
         padding-top: 20px;
     }
@@ -23,7 +22,7 @@
         padding: 6px 8px 6px 16px;
         text-decoration: none;
         font-size: 20px;
-        color: #818181;
+        color: #faf4f4;
         display: block;
         border: none;
         background: none;
@@ -36,7 +35,7 @@
     /* On mouse-over */
     .sidenav a:hover,
     .dropdown-btn:hover {
-        color: #f1f1f1;
+        color: #c8d455;
     }
 
     /* Main content */
@@ -83,7 +82,16 @@
 <div class="row">
     <div class="col-2">
         <div class="sidenav">
-            <a href="#about">Tableau de bord</a>
+            <!-- Les Messages -->
+
+            <button class="dropdown-btn">
+                Messages
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="">Ecire</a>
+                <a href="{% url 'messages' %}">Liste des messages</a>
+            </div>
 
             <!-- Etudiants -->
             <button class="dropdown-btn">
@@ -107,7 +115,7 @@
                 <a href="">Ajouter un Staff</a>
             </div>
 
-            <!-- Matieres -->
+            <!-- Modules -->
 
             <!-- Etudiants -->
             <button class="dropdown-btn">

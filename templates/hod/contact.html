@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Nom et Prenom</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" name="nom">
+
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Adresse Email</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" name="email">
+
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Numero de Telephone</label>
+            <input type="number" class="form-control" id="exampleInputEmail1" name="telephone">
+
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Motive de Message</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" name="motive_message" rows="3"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary mb-3">Submit</button>
+    </form>
+</div>
+{% endblock content %}

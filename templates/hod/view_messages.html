@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container pt-5">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Envoyeur</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Message</th>
+                <th scope="col">Date envoye</th>
+                <th scope="col">Lire</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for inbox in inboxes %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>
+                    {% if request.user.username != inbox.envoyeur.username %}
+                    {{ inbox.envoyeur }}
+                    {% else %}
+                    Moi
+                    {% endif %}
+                </td>
+                <td>{{ inbox.titre_message }}</td>
+                <td>{{ inbox.message|truncatewords:5 }}</td>
+                <td>{{ inbox.date_cree }}</td>
+
+                {% if inbox.lu %}
+                <td><a href="{% url 'message' inbox.id %}" class="btn btn-danger mx-auto" style="width:60px;">Lu</a>
+                </td>
+                {% else %}
+                <td><a href="{% url 'message' inbox.id %}" class="btn btn-info mx-auto" style="width:60px;">Lire</a>
+                </td>
+                {% endif %}
+
+
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import CustomUser, Promotion, Filiere, Module, Student, Staff, Profile, StudentRecord
+from .models import (CustomUser, Promotion, Filiere, Module,
+                     Student, Staff, Profile, StudentRecord,
+                     Message
+                     )
 from django.contrib import messages
-
+from django.db import connection
+from django.db.models import Q
 
 @login_required(login_url='login')
 def HOME(request):
@@ -12,6 +16,10 @@ def HOME(request):
     total_staff = Staff.objects.all().count()
     
 
+    etudiant = Student.objects.all()
+    print(etudiant.query)
+    print("")
+    print(connection.queries)
     # student_male = Student.objects.filter(gender='Male').count()
     # student_female = Student.objects.filter(gender='Femelle').count()
     # teacher_count = Course.objects.filter(proffeseur='').count()
@@ -259,3 +267,44 @@ def view_staffs(request):
 #             messages.success(request, f"{nom} {prenom} Veuillez lui communiquer son identifiant et mot de passe")
 #             return redirect('view-staffs')
 #     return render(request, 'hod/add_staff.html')
+
+
+def view_messages(request):
+    
+    inboxes = Message.objects.filter(
+            Q(destinataire_email=request.user.email) | Q(envoyeur=request.user)
+        )
+
+    context = {
+        'inboxes': inboxes
+    }
+    return render(request, 'hod/view_messages.html', context)
+
+
+def view_message(request, id):
+
+    message = Message.objects.get(id=id)
+    message.lu = True
+    message.save()
+    context = {
+        'message': message
+    }
+    return render(request, 'hod/view_message.html', context)
+
+
+def send_message(request):
+
+    if request.method == 'POST':
+        destinataire = request.POST.get('destinataire')
+        titre = request.POST.get('titre')
+        message = request.POST.get('message')
+        # print(destinataire, titre, message)
+        print(request.user)
+        le_message = Message()
+        le_message.envoyeur = request.user
+        le_message.destinataire_email = destinataire
+        le_message.titre_message = titre
+        le_message.message = message
+        le_message.save()
+        messages.success(request, f'message envoye a {destinataire}')
+        return redirect('profile')

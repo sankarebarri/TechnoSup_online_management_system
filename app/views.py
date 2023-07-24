@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect, HttpResponse
 from app.EmailBackEnd import EmailBackEnd
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from app.models import CustomUser, StudentRecord
+from app.models import CustomUser, StudentRecord, Message, Contact
 from django.contrib import messages
+from django.db.models import Q
 
 
 # general home page
@@ -54,8 +55,14 @@ def do_logout(request):
 # @login_required(login_url='login')
 def profile(request):
     user = CustomUser.objects.get(id=request.user.id)
+    inboxes = Message.objects.filter(
+            Q(destinataire_email=request.user.email) | Q(envoyeur=request.user)
+        )
+    
+    message_total = inboxes.count()
     context = {
         'user': user,
+        'message_total': message_total
     }
     return render(request, 'users/profile.html', context)
 
@@ -91,3 +98,25 @@ def subjects(request):
     }
 
     return render(request, 'users/subjects.html', context)
+
+
+def contact(request):
+
+    if request.method == 'POST':
+        nom_prenom = request.POST.get('nom')
+        email = request.POST.get('email')
+        telephone = request.POST.get('telephone')
+        motive_message = request.POST.get('motive_message')
+        
+        contact = Contact(
+            nom_prenom = nom_prenom,
+            email = email,
+            telephone = telephone,
+            motive_message = motive_message
+        )
+
+        contact.save()
+        messages.success(request, 'Votre message a ete envoye, nous vous contacterons bientot. Merci!')
+        return redirect('contact')
+
+    return render(request, 'hod/contact.html')

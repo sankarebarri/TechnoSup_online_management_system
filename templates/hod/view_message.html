@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container pt-5">
+    <h1>De: <code>{{ message.envoyeur.email }}</code> </h1>
+    <h1>A: <code>{{ message.destinataire_email }}</code></h1>
+    <h3>Titre: {{ message.titre_message }}</h3>
+    <br>
+    <p>{{ message.message }}</p>
+    <a href="{% url 'messages' %}" class="btn btn-primary mb-5">Inbox</a>
+</div>
+{% endblock content %}

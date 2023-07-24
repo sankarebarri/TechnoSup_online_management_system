@@ -1,3 +1,9 @@
+body::before {
+    display: block;
+    content: "";
+    height: 60px;
+}
+
 .a-hover {
     font-weight: bolder;
 }
@@ -7,7 +13,11 @@
 }
 
 .navbar-brand:hover, .nav-right:hover {
-    color: azure;
+    color: rgb(71, 83, 48);
+}
+
+.nav-item a {
+    color: white;
 }
 
 .nav-right {

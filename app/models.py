@@ -113,3 +113,26 @@ class StudentRecord(models.Model):
 
     def __str__(self):
         return f'{self.student.user.first_name} - {self.note}'
+    
+
+class Message(models.Model):
+    envoyeur = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    titre_message = models.CharField(max_length=100)
+    message = models.TextField()
+    destinataire_email = models.EmailField()
+    date_cree = models.DateTimeField(auto_now_add=True)
+    lu = models.BooleanField(default=False)
+
+    def __str__(self) -> str:
+        return self.message[:100]
+    
+
+
+class Contact(models.Model):
+    nom_prenom = models.TextField()
+    email = models.EmailField()
+    telephone = models.IntegerField()
+    motive_message = models.TextField()
+
+    def __str__(self):
+        return f"{self.nom_prenom} -- {self.telephone}"
