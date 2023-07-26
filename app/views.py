@@ -50,8 +50,7 @@ def do_logout(request):
     logout(request)
     return redirect('home_page')
 
-
-
+#signed in user profile
 # @login_required(login_url='login')
 def profile(request):
     user = CustomUser.objects.get(id=request.user.id)
@@ -65,6 +64,14 @@ def profile(request):
         'message_total': message_total
     }
     return render(request, 'users/profile.html', context)
+
+#admin can check other profile
+# def admin_check_profile(request, id):
+#     user = CustomUser.objects.get(id=id)
+#     context = {
+#         'user':user
+#     }
+#     return render(request, 'users/profile.html', context)
 
 def profile_update(request):
     if request.method == 'POST':
@@ -120,3 +127,9 @@ def contact(request):
         return redirect('contact')
 
     return render(request, 'hod/contact.html')
+
+def nos_filiers(request):
+    return render(request, 'hod/nos_filiers.html')
+
+def a_propos_de_nous(request):
+    return render(request, 'hod/a_propos_de_nous.html')

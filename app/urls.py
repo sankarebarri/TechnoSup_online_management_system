@@ -3,6 +3,9 @@ from . import hod_views, views, staff_views
 
 urlpatterns = [
     path('', views.home_page, name='home_page'),
+    path('nos_filiers/', views.nos_filiers, name='nos_filiers'),
+    path('a_propos_de_nous/', views.a_propos_de_nous, name='a_propos_de_nous'),
+    
 
     path('login', views.login_page, name='login'),
     path('do_login', views.do_login, name='do-login'),
@@ -11,6 +14,7 @@ urlpatterns = [
     ## Profile ##
     path('profile', views.profile, name='profile'),
     path('profile/update', views.profile_update, name='profile-update'),
+    # path('profile/<str:id>', views.admin_check_profile, name='admin-check-profile'),
 
     ## HOD ##
     path('hod/home', hod_views.HOME, name='hod_home'),
